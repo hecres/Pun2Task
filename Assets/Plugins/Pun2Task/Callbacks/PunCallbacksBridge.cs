@@ -705,34 +705,6 @@ namespace Pun2Task.Callbacks
         }
 
         #endregion
-
-        #region OnErrorInfo
-
-        private AsyncReactiveProperty<ErrorInfo> _onErrorInfo;
-
-        public UniTask<ErrorInfo> OnErrorInfoAsync
-        {
-            get
-            {
-                if (_onErrorInfo == null)
-                {
-                    _onErrorInfo = new AsyncReactiveProperty<ErrorInfo>(default);
-                    _onErrorInfo.AddTo(this.GetCancellationTokenOnDestroy());
-                }
-
-                return _onErrorInfo.WaitAsync();
-            }
-        }
-
-        public override void OnErrorInfo(ErrorInfo errorInfo)
-        {
-            if (_onErrorInfo != null)
-            {
-                _onErrorInfo.Value = errorInfo;
-            }
-        }
-
-        #endregion
     }
 }
 #endif

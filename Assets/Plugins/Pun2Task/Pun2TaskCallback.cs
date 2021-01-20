@@ -339,26 +339,6 @@ namespace Pun2Task
             return GetBridge().OnLobbyStatisticsUpdateAsync;
         }
 
-        /// <summary>
-        /// Called when the client receives an event from the server indicating that an error happened there.
-        /// </summary>
-        /// <remarks>
-        /// In most cases this could be either:
-        /// 1. an error from webhooks plugin (if HasErrorInfo is enabled), read more here:
-        /// https://doc.photonengine.com/en-us/realtime/current/gameplay/web-extensions/webhooks#options
-        /// 2. an error sent from a custom server plugin via PluginHost.BroadcastErrorInfoEvent, see example here:
-        /// https://doc.photonengine.com/en-us/server/current/plugins/manual#handling_http_response
-        /// 3. an error sent from the server, for example, when the limit of cached events has been exceeded in the room
-        /// (all clients will be disconnected and the room will be closed in this case)
-        /// read more here: https://doc.photonengine.com/en-us/realtime/current/gameplay/cached-events#special_considerations
-        /// </remarks>
-        /// <param name="errorInfo">object containing information about the error</param>
-        public static UniTask<ErrorInfo> OnErrorInfoAsync()
-        {
-            return GetBridge().OnErrorInfoAsync;
-        }
-
-
         #region Bridge
 
         private static PunCallbacksBridge _instance;
