@@ -57,23 +57,6 @@ namespace Pun2Task
             throw new ConnectionFailedException(disconnectCause);
         }
 
-        public static async UniTask ConnectUsingSettingsAsync(
-            AppSettings appSettings,
-            bool startInOfflineMode = false,
-            CancellationToken token = default)
-        {
-            var task = UniTask.WhenAny(
-                Pun2TaskCallback.OnConnectedToMasterAsync().AsAsyncUnitUniTask(),
-                Pun2TaskCallback.OnDisconnectedAsync());
-
-            PhotonNetwork.ConnectUsingSettings(appSettings, startInOfflineMode);
-
-            var (winIndex, _, disconnectCause) = await task.WithCancellation(token);
-
-            if (winIndex == 0) return;
-            throw new ConnectionFailedException(disconnectCause);
-        }
-
         public static async UniTask ConnectToMasterAsync(
             string masterServerAddress,
             int port,
